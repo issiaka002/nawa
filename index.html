@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NAWA · Le chocolat fait là où pousse le cacao</title>
+<meta name="description" content="NAWA, maison de chocolat fictive à Soubré, Côte d'Ivoire : de la cabosse à la tablette, sans quitter la plantation. Site de démonstration.">
+<meta name="theme-color" content="#0a120d">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a120d'/><rect x='7' y='7' width='18' height='18' rx='2' fill='%23f0ae2b'/></svg>">
+<link rel="preload" as="image" href="assets/hero-far.webp" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
+<link rel="stylesheet" href="scrollcraft.css">
+<link rel="stylesheet" href="nawa.css">
+</head>
+<body>
+
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="bar">
+  <a class="bar__mark" href="#top" aria-label="NAWA, haut de page">NAWA</a>
+  <nav aria-label="Navigation principale">
+    <a class="bar__cta" href="#reserver" data-nawa-jump>Réserver une tablette</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- 1 · ARRIVAL. Layered grove: far plate, mist, basket, near branch. -->
+  <section class="hero" data-sc-act="pin" data-sc-span="2" data-sc-drift="#0a120d" aria-labelledby="hero-title">
+    <div data-sc-stage class="hero__stage">
+      <div class="hero__plane hero__plane--far" aria-hidden="true">
+        <img src="assets/hero-far.webp" width="2400" height="1800" alt="" fetchpriority="high">
+      </div>
+      <div class="hero__mist" aria-hidden="true"></div>
+      <div class="hero__scrim" aria-hidden="true"></div>
+
+      <div class="hero__copy">
+        <div class="hero__lead">
+          <h1 id="hero-title" class="sc-display hero__title" data-sc-cue="0 0.5 0 0.36" data-sc-kinetic="lines">Le cacao pousse ici. Le chocolat aussi.</h1>
+          <p class="hero__sub" data-sc-cue="0 0.46 0 0.36">NAWA transforme la fève en tablette à Soubré, à quelques pas des arbres qui l'ont portée.</p>
+        </div>
+        <div class="hero__place" data-sc-cue="0.52 1 0.3 0.14">
+          <span class="sc-label">Soubré, région de la Nawa</span>
+          <p>Dans le sud-ouest de la Côte d'Ivoire, les cabosses se cueillent à la main, arbre après arbre.</p>
+        </div>
+      </div>
+
+      <div class="hero__plane hero__plane--subject">
+        <div class="hero__shadow" aria-hidden="true"></div>
+        <img src="assets/hero-basket.webp" width="1500" height="868" alt="Un panier tressé rempli de cabosses de cacao jaunes et vertes, tout juste récoltées.">
+      </div>
+      <div class="hero__plane hero__plane--near" aria-hidden="true">
+        <img src="assets/hero-branch.webp" width="1300" height="1624" alt="">
+      </div>
+      <div class="hero__floor" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- 2 · TENSION. No image on purpose. -->
+  <section class="tension sc-section" data-sc-act="flow" data-sc-drift="#0b100c" aria-labelledby="tension-title">
+    <div class="sc-wrap tension__grid">
+      <h2 id="tension-title" class="sc-display tension__claim" data-sc-cue="0.08 0.58 0.42 0.2" data-sc-kinetic="lines">Le pays qui récolte le plus de cacao au monde fabrique très peu de chocolat.</h2>
+      <div class="tension__body sc-stack" data-sc-in data-sc-stagger="70">
+        <p class="sc-lede">La fève quitte la Côte d'Ivoire en sacs de jute. Elle devient tablette à des milliers de kilomètres de là.</p>
+        <p class="sc-body">NAWA fait le chemin inverse. Récolte, fermentation, séchage, torréfaction, conchage, moulage : tout se passe à Soubré, entre la plantation et l'atelier.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · METHOD. Lateral travel reads as a sequence of steps. -->
+  <section class="method" data-sc-act="pan" data-sc-span="2.6" data-sc-drift="#0e1510" aria-labelledby="method-title">
+    <div data-sc-stage class="method__stage">
+      <div class="rail" data-sc-pan="0.03">
+        <div class="rail__lead">
+          <h2 id="method-title" class="sc-display sc-display--lg">Quatre gestes avant la machine.</h2>
+          <p class="sc-body">Le goût d'un chocolat se décide ici, à la main et au soleil, bien avant l'atelier.</p>
+        </div>
+
+        <article class="step">
+          <figure class="step__fig"><img src="assets/step-cabosse.webp" width="960" height="1200" alt="Des cabosses rouges accrochées au tronc d'un cacaoyer, en Côte d'Ivoire."></figure>
+          <h3>Cabosse</h3>
+          <p class="step__fact">Cueillie mûre, ouverte le jour même</p>
+          <p class="step__text">Le fruit pousse à même le tronc. On le détache sans blesser l'arbre.</p>
+        </article>
+
+        <article class="step" style="--at: 0.1">
+          <figure class="step__fig"><img src="assets/step-ferment.webp" width="960" height="1200" alt="Des fèves de cacao fraîches fermentent dans une caisse, sous des feuilles de bananier." loading="lazy"></figure>
+          <h3>Fermentation</h3>
+          <p class="step__fact">Cinq à sept jours sous feuilles de bananier</p>
+          <p class="step__text">La pulpe chauffe et s'écoule. C'est là que naissent les arômes.</p>
+        </article>
+
+        <article class="step" style="--at: 0.34">
+          <figure class="step__fig"><img src="assets/step-sechage.webp" width="960" height="1200" alt="Des fèves de cacao sèchent sur une claie grillagée à Soubré." loading="lazy"></figure>
+          <h3>Séchage</h3>
+          <p class="step__fact">Environ une semaine au soleil</p>
+          <p class="step__text">Les fèves sont étalées sur des claies et brassées chaque jour.</p>
+        </article>
+
+        <article class="step" style="--at: 0.56">
+          <figure class="step__fig"><img src="assets/step-torref.webp" width="960" height="1200" alt="Gros plan sur des fèves de cacao torréfiées." loading="lazy"></figure>
+          <h3>Torréfaction</h3>
+          <p class="step__fact">Par petits lots, à feu doux</p>
+          <p class="step__text">La coque se détache, la fève brunit, l'odeur de chocolat arrive.</p>
+        </article>
+
+        <div class="rail__note" style="--at: 0.74">
+          <p class="sc-lede">Ensuite seulement, la fève entre à l'atelier.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · PEAK. The first stretch is black on purpose (authored silence). -->
+  <section class="peak" data-sc-act="scrub" data-sc-span="3.4" data-sc-dwell="0.4" data-sc-drift="#0b0604" aria-labelledby="peak-title">
+    <div data-sc-stage class="peak__stage">
+      <picture>
+        <source media="(max-width: 860px)" srcset="assets/conche-poster-p.webp">
+        <img class="sc-stage__poster" src="assets/conche-poster.webp" alt="">
+      </picture>
+      <video data-sc-scrub data-sc-src="assets/conche.mp4" data-sc-src-mobile="assets/conche-p.mp4" muted playsinline aria-label="Du chocolat fondu tourne lentement dans une cuve."></video>
+      <div class="peak__veil" aria-hidden="true"></div>
+      <div class="peak__scrim" aria-hidden="true"></div>
+
+      <div class="peak__scrim peak__scrim--you" aria-hidden="true"></div>
+
+      <div class="peak__lead">
+        <h2 id="peak-title" class="sc-display sc-display--lg" data-sc-cue="0.15 0.62 0.3 0.2" data-sc-kinetic="lines">Puis la fève devient chocolat.</h2>
+        <p class="sc-lede" data-sc-cue="0.19 0.62 0.3 0.2">Broyée, la fève devient une pâte. La pâte tourne des heures : l'acidité s'en va, le grain disparaît. C'est le conchage.</p>
+      </div>
+      <p class="sc-display peak__you" data-sc-cue="0.53 0.95 0.25 0.16">C'est votre molette qui fait tourner la cuve.</p>
+    </div>
+  </section>
+
+  <!-- 5 · RELEASE. Light after dark, short and plain. -->
+  <section class="release sc-section" data-sc-act="flow" data-sc-drift="#15100b" aria-labelledby="release-title">
+    <div class="sc-wrap release__grid">
+      <figure class="release__fig" data-sc-reveal="up" data-sc-reveal-at="0.08 0.4">
+        <img src="assets/pour.webp" width="2200" height="1160" alt="Un filet de chocolat fondu coule dans une cuve de chocolat brillant." loading="lazy">
+      </figure>
+      <div class="release__text sc-stack" data-sc-in data-sc-stagger="70">
+        <h2 id="release-title" class="sc-display sc-display--md">Coulé, puis laissé tranquille.</h2>
+        <p class="sc-body">Le chocolat est tempéré, versé dans les moules, et refroidit à son rythme. Rien n'est ajouté pour aller plus vite.</p>
+        <dl class="spec">
+          <dt>Dans la tablette</dt>
+          <dd>Fèves de cacao, sucre de canne, beurre de cacao.</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · COMMITMENT. The wheel breaks the bar; the square that leaves is the button. -->
+  <section id="reserver" class="close" data-sc-act="pin" data-sc-span="1.6" data-sc-drift="#0a120d" aria-labelledby="close-title">
+    <div data-sc-stage class="close__stage" data-sc-verify-state="0">
+      <div class="close__text">
+        <h2 id="close-title" class="sc-display sc-display--lg" data-sc-cue="0 1 0 0">Le dernier carré est pour vous.</h2>
+        <p class="sc-lede" data-sc-cue="0.06">La première fournée se prépare à Soubré. Le carré qui se détache est votre réservation.</p>
+      </div>
+
+      <div class="tab" data-nawa-tab>
+        <div class="tab__bar">
+          <span class="tab__sq"></span><span class="tab__sq"></span><span class="tab__sq"></span>
+          <span class="tab__sq"></span><span class="tab__sq"></span><span class="tab__sq"></span>
+          <span class="tab__sq"></span><span class="tab__sq"></span><span class="tab__sq"></span>
+          <span class="tab__sq"></span><span class="tab__sq"></span>
+          <a class="tab__sq tab__piece" href="#reservation" data-nawa-reserve>
+            <span class="tab__piece-in"><span class="tab__label">Réserver une tablette</span></span>
+          </a>
+          <span class="tab__light" aria-hidden="true"></span>
+          <span class="tab__crack" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <footer class="foot">
+        <p>NAWA est une marque fictive, créée pour une démonstration. Aucune tablette n'est en vente.</p>
+        <p><a href="credits.html">Crédits photo et vidéo</a></p>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<dialog class="note" id="reservation" aria-labelledby="note-title">
+  <h2 id="note-title">Ceci est une démonstration.</h2>
+  <p>NAWA n'existe pas : c'est une maison de chocolat imaginée pour tester un site animé au défilement. Rien n'a été envoyé et aucune réservation n'a été enregistrée.</p>
+  <form method="dialog">
+    <button class="note__close" type="submit">Fermer</button>
+  </form>
+</dialog>
+
+<script src="scrollcraft.js"></script>
+<script>ScrollCraft.mount(document.body);</script>
+<script src="nawa.js"></script>
+</body>
+</html>

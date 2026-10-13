@@ -1,0 +1,8 @@
+# Local only: sources, verification output, tooling, working notes
+src/
+lab/
+node_modules/
+package.json
+package-lock.json
+BRIEF.md
+.DS_Store

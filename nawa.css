@@ -1,0 +1,516 @@
+/* NAWA: page styles. The engine (scrollcraft.css / .js) is untouched. */
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("assets/fonts/bricolage-grotesque-latin.woff2") format("woff2");
+  font-weight: 200 800; font-stretch: 100%; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("assets/fonts/bricolage-grotesque-latin-ext.woff2") format("woff2");
+  font-weight: 200 800; font-stretch: 100%; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C0, U+2113;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("assets/fonts/geist-latin.woff2") format("woff2");
+  font-weight: 300 600; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("assets/fonts/geist-latin-ext.woff2") format("woff2");
+  font-weight: 300 600; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C0, U+2113;
+}
+
+/* Deep forest ground, bone ink, one accent taken from a ripe cabosse. */
+:root {
+  --sc-canvas:     #0a120d;
+  --sc-surface:    #141d16;
+  --sc-ink:        #efe8d8;
+  --sc-ink-soft:   #a5aa93;
+  --sc-accent:     #f0ae2b;
+  --sc-accent-ink: #1b1203;
+  --sc-font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --sc-font-text:    "Geist", system-ui, sans-serif;
+  --sc-shadow-color: 140 30% 3%;
+
+  --forest: #0a120d;
+  --cocoa-1: #4b2a19;
+  --cocoa-2: #36190d;
+  --cocoa-3: #241008;
+  --bar-h: 4.25rem;
+}
+
+.sc-display { font-weight: 560; font-variation-settings: "opsz" 96; }
+.sc-lede { font-weight: 400; }
+
+/* ------------------------------------------------------------------ bar -- */
+.bar {
+  position: fixed; inset: 0 0 auto 0; z-index: var(--sc-z-chrome);
+  height: var(--bar-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding-inline: var(--sc-gutter);
+  background: linear-gradient(to bottom, color-mix(in oklab, var(--forest) 82%, transparent), transparent);
+  pointer-events: none;
+}
+.bar > * { pointer-events: auto; }
+.bar__mark {
+  font-family: var(--sc-font-display);
+  font-weight: 700; font-size: 1.35rem; letter-spacing: 0.14em;
+  text-decoration: none; color: var(--sc-ink);
+  padding-block: var(--sc-3);
+}
+.bar__cta {
+  display: inline-flex; align-items: center; min-height: 2.75rem;
+  padding: 0 var(--sc-5);
+  border-radius: var(--sc-r-sm);
+  background: var(--sc-accent); color: var(--sc-accent-ink);
+  font-weight: 560; font-size: var(--sc-t-sm); letter-spacing: 0;
+  text-decoration: none; white-space: nowrap;
+  box-shadow: var(--sc-e1), inset 0 1px 0 rgb(255 255 255 / 0.28);
+  transition: transform 140ms var(--sc-ease-out), background-color 140ms var(--sc-ease-out);
+}
+.bar__cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .bar__cta:hover { background: color-mix(in oklab, var(--sc-accent) 86%, white); }
+}
+
+/* ----------------------------------------------------------------- hero -- */
+.hero__stage {
+  --p: var(--sc-p, 0);
+  --far-y: -4vh;   --far-s: 0.07;
+  --sub-x: -5vw;   --sub-y: -3vh;  --sub-s: 0.16;
+  --near-x: 9vw;   --near-y: -26vh; --near-s: 0.32;
+  background: var(--forest);
+}
+.hero__plane { position: absolute; will-change: transform; }
+.hero__plane img { width: 100%; height: 100%; max-width: none; }
+
+.hero__plane--far { inset: -4% -3%; }
+.hero__plane--far img {
+  object-fit: cover; object-position: 50% 78%;
+  transform:
+    translate3d(calc(var(--px, 0) * -12px), calc(var(--p) * var(--far-y) + var(--py, 0) * -7px), 0)
+    scale(calc(1.1 - var(--p) * var(--far-s)));
+}
+
+/* Ground mist between the grove and the basket: separation, not a wash. */
+.hero__mist {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 34% at 72% 70%, color-mix(in oklab, #cfd8b4 20%, transparent), transparent 70%),
+    radial-gradient(48% 30% at 20% 82%, color-mix(in oklab, #cfd8b4 11%, transparent), transparent 72%);
+  opacity: calc(1 - var(--p) * 0.55);
+  transform: translate3d(calc(var(--p) * 3vw + var(--px, 0) * -5px), 0, 0);
+}
+.hero__scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(98deg,
+      color-mix(in oklab, var(--forest) 94%, transparent) 0%,
+      color-mix(in oklab, var(--forest) 86%, transparent) 34%,
+      color-mix(in oklab, var(--forest) 60%, transparent) 54%,
+      transparent 76%);
+}
+
+.hero__copy {
+  position: absolute; z-index: 3;
+  left: var(--sc-gutter); top: clamp(6.5rem, 19vh, 12rem);
+  width: min(52rem, 58vw);
+  display: grid;
+}
+.hero__copy > * { grid-area: 1 / 1; }
+.hero__title {
+  font-size: clamp(2.5rem, 1.2rem + 4.7vw, 5.5rem);
+  line-height: 0.96;
+  max-width: 11.2em;
+}
+.hero__lead { align-self: start; }
+.hero__sub {
+  margin-top: var(--sc-5);
+  font-size: var(--sc-t-lg); line-height: 1.42; letter-spacing: var(--sc-track-snug);
+  max-width: 31ch; color: var(--sc-ink); text-wrap: balance;
+}
+.hero__place { align-self: start; max-width: 24rem; }
+.hero__place .sc-label { display: block; font-family: var(--sc-font-text); font-weight: 500; color: var(--sc-accent); margin-bottom: var(--sc-3); }
+.hero__place p { margin: 0; font-size: var(--sc-t-xl); line-height: 1.2; letter-spacing: var(--sc-track-snug); font-family: var(--sc-font-display); font-weight: 500; }
+
+/* The basket and its contact shadow are one plane: they travel together and
+   scale from the point where the basket meets the ground. */
+.hero__plane--subject {
+  z-index: 4;
+  right: 3.5vw; bottom: 3.5vh;
+  width: min(54vw, 58rem); aspect-ratio: 1500 / 868;
+  transform-origin: 50% 96%;
+  transform:
+    translate3d(calc(var(--p) * var(--sub-x) + var(--px, 0) * 10px), calc(var(--p) * var(--sub-y) + var(--py, 0) * 5px), 0)
+    scale(calc(1 + var(--p) * var(--sub-s)));
+}
+.hero__plane--subject img { position: relative; filter: drop-shadow(0 18px 22px rgb(3 7 4 / 0.5)) brightness(0.87) saturate(0.93); }
+.hero__shadow {
+  position: absolute; left: 3%; right: 1%; bottom: -7%; height: 27%;
+  background: radial-gradient(closest-side, rgb(2 5 3 / 0.94), rgb(2 5 3 / 0.6) 52%, transparent);
+  filter: blur(12px);
+}
+
+.hero__plane--near {
+  z-index: 5;
+  top: -9vh; right: -5vw;
+  width: min(34vw, 34rem); aspect-ratio: 1300 / 1624;
+  transform-origin: 80% 0%;
+  transform:
+    translate3d(calc(var(--p) * var(--near-x) + var(--px, 0) * 26px), calc(var(--p) * var(--near-y) + var(--py, 0) * 14px), 0)
+    rotate(calc(var(--p) * -5deg))
+    scale(calc(1 + var(--p) * var(--near-s)));
+}
+.hero__plane--near img { filter: blur(1.6px) brightness(0.62) saturate(0.85); }
+
+/* The floor hides the clip line and lets the scene resolve into the ground. */
+.hero__floor {
+  position: absolute; inset: auto 0 0 0; height: 30vh; z-index: 6; pointer-events: none;
+  background: linear-gradient(to top, var(--forest) 0%, color-mix(in oklab, var(--forest) 62%, transparent) 38%, transparent 100%);
+  opacity: calc(0.55 + var(--p) * 0.45);
+}
+
+/* -------------------------------------------------------------- tension -- */
+.tension {
+  padding-top: clamp(3rem, 9vh, 6rem);
+  min-height: 92vh; min-height: 92svh;
+  display: grid; align-items: center;
+}
+.tension__grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--sc-5); row-gap: var(--sc-8); }
+.tension__claim {
+  grid-column: 1 / span 10;
+  font-size: var(--sc-t-3xl); line-height: 1; max-width: 15em;
+}
+.tension__body { grid-column: 7 / span 6; }
+.tension__body .sc-lede { color: var(--sc-ink); }
+
+/* --------------------------------------------------------------- method -- */
+.method__stage { display: flex; align-items: center; }
+.rail {
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-inline: var(--sc-gutter);
+  padding-top: var(--bar-h);
+}
+.rail > * { flex: none; }
+.rail__lead { width: min(38vw, 34rem); }
+.rail__lead .sc-body { margin-top: var(--sc-5); max-width: 34ch; }
+.step { --w: clamp(14rem, min(24vw, 40vh), 22rem); width: var(--w); }
+.step:nth-of-type(odd)  { translate: 0 2.5vh; }
+.step:nth-of-type(even) { translate: 0 -3.5vh; }
+.step__fig {
+  margin: 0; aspect-ratio: 4 / 5; overflow: hidden;
+  border-radius: var(--sc-r-sm);
+  box-shadow: var(--sc-e3), var(--sc-edge);
+  background: var(--sc-surface);
+}
+.step__fig img { width: 100%; height: 100%; object-fit: cover; }
+.step h3 {
+  margin: var(--sc-5) 0 0;
+  font-family: var(--sc-font-display); font-weight: 600;
+  font-size: var(--sc-t-xl); letter-spacing: var(--sc-track-snug); line-height: 1.05;
+}
+.step__fact { margin: var(--sc-2) 0 0; color: var(--sc-accent); font-size: var(--sc-t-sm); font-weight: 500; }
+.step__text { margin: var(--sc-2) 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); line-height: 1.5; max-width: 32ch; }
+.rail__note { width: min(30vw, 24rem); }
+.rail__note .sc-lede { font-family: var(--sc-font-display); font-size: var(--sc-t-2xl); line-height: 1.04; letter-spacing: var(--sc-track-tight); font-weight: 560; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* A staggered settle so the rail reads as arriving, not as a slideshow. */
+  .rail .step:not(:first-of-type), .rail__note {
+    --t: clamp(0, calc((var(--sc-p, 0) - var(--at, 0)) * 7), 1);
+    opacity: calc(0.55 + 0.45 * var(--t));
+  }
+  .rail .step:not(:first-of-type) .step__fig, .rail__note .sc-lede {
+    transform: translate3d(0, calc((1 - var(--t)) * 26px), 0);
+  }
+}
+
+/* ----------------------------------------------------------------- peak -- */
+.peak__stage { background: #0b0604; }
+.peak__veil {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: #0b0604;
+  opacity: clamp(0, calc(1 - var(--sc-p, 0) / 0.13), 1);
+}
+.peak__scrim {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(to top right,
+    color-mix(in oklab, #0b0604 95%, transparent) 0%,
+    color-mix(in oklab, #0b0604 78%, transparent) 30%,
+    color-mix(in oklab, #0b0604 34%, transparent) 52%,
+    transparent 70%);
+}
+.peak__scrim--you {
+  background: linear-gradient(to top left,
+    color-mix(in oklab, #0b0604 95%, transparent) 0%,
+    color-mix(in oklab, #0b0604 78%, transparent) 28%,
+    color-mix(in oklab, #0b0604 30%, transparent) 48%,
+    transparent 64%);
+}
+.peak__lead {
+  position: absolute; z-index: var(--sc-z-copy);
+  left: var(--sc-gutter); bottom: clamp(3rem, 11vh, 8rem);
+  width: min(44rem, 62vw);
+}
+.peak__lead .sc-lede { margin-top: var(--sc-5); max-width: 34ch; }
+.peak__you {
+  position: absolute; z-index: var(--sc-z-copy);
+  right: var(--sc-gutter); bottom: clamp(3rem, 11vh, 8rem);
+  font-size: var(--sc-t-3xl); line-height: 1; max-width: 8.4em; text-align: right;
+}
+
+/* -------------------------------------------------------------- release -- */
+.release { padding-top: clamp(3rem, 8vh, 6rem); }
+.release__grid {
+  display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--sc-5);
+  align-items: end;
+}
+.release__fig {
+  grid-column: 1 / span 8; margin: 0 0 0 calc(var(--sc-gutter) * -1);
+  border-radius: 0 var(--sc-r-sm) var(--sc-r-sm) 0; overflow: hidden;
+  box-shadow: var(--sc-e3);
+}
+.release__fig img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 60%; }
+.release__text { grid-column: 9 / span 4; padding-bottom: var(--sc-6); }
+.release__text .sc-body { max-width: 34ch; }
+.spec { margin: var(--sc-7) 0 0; padding-top: var(--sc-5); border-top: 1px solid var(--sc-hairline-strong); }
+.spec dt { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+.spec dd { margin: var(--sc-1) 0 0; font-family: var(--sc-font-display); font-size: var(--sc-t-lg); font-weight: 500; letter-spacing: var(--sc-track-snug); line-height: 1.25; }
+
+/* ---------------------------------------------------------------- close -- */
+.close__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  column-gap: var(--sc-7);
+  padding: var(--bar-h) var(--sc-gutter) 0;
+  background:
+    radial-gradient(70% 60% at 72% 46%, color-mix(in oklab, #3c2a14 34%, transparent), transparent 70%),
+    var(--forest);
+}
+.close__text .sc-display { max-width: 9em; }
+.close__text .sc-lede { margin-top: var(--sc-5); max-width: 32ch; color: var(--sc-ink-soft); }
+
+/* The bar. Drawn in CSS so every square is real markup and one can be a link. */
+.tab {
+  --seg-w: clamp(6.4rem, min(13.4vw, 21vh), 12.4rem);
+  --seg-h: calc(var(--seg-w) * 0.62);
+  --groove: calc(var(--seg-w) * 0.035);
+  --k: 0;
+  justify-self: center;
+  position: relative;
+  rotate: -4deg;
+  filter: drop-shadow(0 30px 34px rgb(2 5 3 / 0.62));
+}
+.tab__bar {
+  position: relative;
+  display: grid; grid-template-columns: repeat(3, var(--seg-w)); grid-auto-rows: var(--seg-h);
+  gap: var(--groove);
+}
+.tab__sq {
+  position: relative;
+  border-radius: calc(var(--seg-w) * 0.035);
+  background:
+    linear-gradient(152deg, color-mix(in oklab, var(--cocoa-1) 100%, white 0%) 0%, var(--cocoa-2) 52%, var(--cocoa-3) 100%);
+  box-shadow:
+    inset 0 0 0 calc(var(--seg-w) * 0.075) var(--cocoa-2),
+    inset calc(var(--seg-w) * 0.085) calc(var(--seg-w) * 0.085) 0 0 rgb(255 214 170 / 0.09),
+    inset calc(var(--seg-w) * -0.085) calc(var(--seg-w) * -0.085) 0 0 rgb(8 2 0 / 0.34),
+    inset 0 1px 0 rgb(255 220 180 / 0.2),
+    inset 0 -2px 3px rgb(8 2 0 / 0.5);
+}
+/* The slab the squares are moulded on, seen through the grooves. */
+.tab__bar::before {
+  content: ""; position: absolute; inset: calc(var(--groove) * -1.6); z-index: -1;
+  border-radius: calc(var(--seg-w) * 0.05);
+  background: linear-gradient(150deg, #2b140a, #180a04);
+}
+/* The slab stops short of the square that will leave, or it would stay behind
+   as a dark tab once the piece is gone. */
+.tab.is-broken .tab__bar::before {
+  clip-path: polygon(0 0, 100% 0, 100% calc(75% - var(--groove)), calc(66.6% + var(--groove)) calc(75% - var(--groove)), calc(66.6% + var(--groove)) 100%, 0 100%);
+}
+/* The light on the chocolate follows the pointer. */
+.tab__light {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  border-radius: calc(var(--seg-w) * 0.035);
+  background: radial-gradient(42% 46% at var(--lx, 30%) var(--ly, 22%), rgb(255 214 168 / 0.3), transparent 72%);
+  mix-blend-mode: screen;
+}
+.tab.is-broken .tab__light {
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 66.6% 75%, 66.6% 100%, 0 100%);
+}
+
+/* The piece: outer node snaps, inner node carries the continuous strain. */
+.tab__piece {
+  display: block; text-decoration: none; color: var(--sc-accent);
+  z-index: 3; border-radius: calc(var(--seg-w) * 0.035);
+  transition: transform 340ms var(--sc-ease-out);
+}
+.tab.is-broken .tab__piece {
+  transform: translate3d(calc(var(--seg-w) * 0.2), calc(var(--seg-h) * 0.3), 0) rotate(8deg);
+}
+.tab__piece-in {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  border-radius: inherit;
+  transform-origin: 0 0;
+  transform: rotate(calc(var(--k) * 1.6deg));
+}
+.tab__sq.tab__piece { background: none; box-shadow: none; }
+.tab__piece-in {
+  transition: box-shadow 340ms var(--sc-ease-out);
+  background: linear-gradient(152deg, var(--cocoa-1) 0%, var(--cocoa-2) 52%, var(--cocoa-3) 100%);
+  box-shadow:
+    inset 0 0 0 calc(var(--seg-w) * 0.075) var(--cocoa-2),
+    inset calc(var(--seg-w) * 0.085) calc(var(--seg-w) * 0.085) 0 0 rgb(255 214 170 / 0.09),
+    inset calc(var(--seg-w) * -0.085) calc(var(--seg-w) * -0.085) 0 0 rgb(8 2 0 / 0.34),
+    inset 0 1px 0 rgb(255 220 180 / 0.2),
+    inset 0 -2px 3px rgb(8 2 0 / 0.5);
+}
+.tab.is-broken .tab__piece-in {
+  box-shadow:
+    inset 0 0 0 calc(var(--seg-w) * 0.075) var(--cocoa-2),
+    inset calc(var(--seg-w) * 0.085) calc(var(--seg-w) * 0.085) 0 0 rgb(255 214 170 / 0.09),
+    inset calc(var(--seg-w) * -0.085) calc(var(--seg-w) * -0.085) 0 0 rgb(8 2 0 / 0.34),
+    inset 0 1px 0 rgb(255 220 180 / 0.2),
+    inset 0 -2px 3px rgb(8 2 0 / 0.5),
+    0 14px 22px rgb(2 5 3 / 0.55);
+}
+.tab__label {
+  font-weight: 600; font-size: clamp(0.72rem, calc(var(--seg-w) * 0.082), 0.98rem);
+  letter-spacing: 0; line-height: 1.15; text-align: center; white-space: nowrap;
+  opacity: calc(0.2 + var(--k) * 0.25);
+  transition: opacity 260ms var(--sc-ease-out);
+}
+.tab.is-broken .tab__label { opacity: 1; }
+.tab__piece:active .tab__piece-in { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .tab.is-broken .tab__piece:hover { transform: translate3d(calc(var(--seg-w) * 0.2), calc(var(--seg-h) * 0.3 - 4px), 0) rotate(6deg); }
+}
+/* The fracture line, opening before the snap. */
+.tab__crack {
+  position: absolute; z-index: 4; pointer-events: none;
+  left: calc(66.6% - var(--groove) * 0.2); top: calc(75% - var(--groove) * 0.6);
+  width: calc(33.4% + var(--groove)); height: 2px;
+  background: linear-gradient(90deg, transparent, rgb(8 2 0 / 0.9) 20%, rgb(8 2 0 / 0.9));
+  transform-origin: 100% 50%;
+  transform: scaleX(var(--k));
+  opacity: calc(var(--k) * 1.4);
+}
+.tab.is-broken .tab__crack { opacity: 0; }
+
+.foot {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; gap: var(--sc-2) var(--sc-6); justify-content: space-between; align-items: baseline;
+  padding-block: var(--sc-5);
+  border-top: 1px solid var(--sc-hairline);
+  font-size: var(--sc-t-xs); color: var(--sc-ink-soft);
+}
+.foot p { margin: 0; }
+.foot a { color: var(--sc-ink); }
+
+/* --------------------------------------------------------------- dialog -- */
+.note {
+  width: min(30rem, calc(100vw - 2 * var(--sc-gutter)));
+  padding: var(--sc-7) var(--sc-6) var(--sc-6);
+  border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-md);
+  background: var(--sc-surface); color: var(--sc-ink);
+  box-shadow: var(--sc-e3), var(--sc-edge);
+}
+.note::backdrop { background: rgb(3 7 4 / 0.72); }
+.note h2 { margin: 0; font-family: var(--sc-font-display); font-weight: 600; font-size: var(--sc-t-xl); letter-spacing: var(--sc-track-snug); line-height: 1.1; }
+.note p { margin: var(--sc-4) 0 0; color: var(--sc-ink-soft); }
+.note__close {
+  margin-top: var(--sc-6); min-height: 2.75rem; padding: 0 var(--sc-5);
+  border: 0; border-radius: var(--sc-r-sm);
+  background: var(--sc-accent); color: var(--sc-accent-ink); font-weight: 560; cursor: pointer;
+  transition: transform 140ms var(--sc-ease-out);
+}
+.note__close:active { transform: scale(0.97); }
+
+/* --------------------------------------------------------------- phones -- */
+@media (max-width: 860px) {
+  :root { --bar-h: 3.75rem; }
+  .bar__mark { font-size: 1.15rem; }
+  .bar__cta { padding-inline: var(--sc-4); font-size: 0.86rem; }
+
+  .hero__stage {
+    --far-y: -2vh;  --far-s: 0.05;
+    --sub-x: 0vw;   --sub-y: -2vh;  --sub-s: 0.08;
+    --near-x: 18vw; --near-y: -7vh; --near-s: 0.2;
+  }
+  .hero__plane--far img { object-position: 38% 70%; }
+  .hero__scrim {
+    background: linear-gradient(to bottom,
+      color-mix(in oklab, var(--forest) 92%, transparent) 0%,
+      color-mix(in oklab, var(--forest) 74%, transparent) 34%,
+      color-mix(in oklab, var(--forest) 20%, transparent) 54%,
+      transparent 66%);
+  }
+  .hero__copy { top: 5.75rem; width: auto; right: var(--sc-gutter); z-index: 7; }
+  .hero__title { font-size: clamp(2.3rem, 10.4vw, 3.2rem); max-width: 9.5em; }
+  .hero__sub { font-size: 1.06rem; max-width: 27ch; margin-top: var(--sc-4); }
+  .hero__place p { font-size: 1.5rem; }
+  .hero__plane--subject { right: -1vw; bottom: 9svh; width: 102vw; }
+  .hero__plane--near { top: 30svh; right: -30vw; width: 60vw; }
+  .hero__floor { height: 22svh; }
+
+  .tension { min-height: 0; padding-block: clamp(4rem, 12vh, 6rem); }
+  .tension__claim { grid-column: 1 / -1; font-size: var(--sc-t-2xl); line-height: 1.02; }
+  .tension__body { grid-column: 1 / -1; }
+  .tension__grid { row-gap: var(--sc-6); }
+
+  .rail { gap: 1.75rem; }
+  .rail__lead { width: 78vw; }
+  .step { --w: min(68vw, 42svh); }
+  .rail__note { width: 74vw; }
+
+  .peak__scrim {
+    background: linear-gradient(to top,
+      color-mix(in oklab, #0b0604 95%, transparent) 0%,
+      color-mix(in oklab, #0b0604 80%, transparent) 26%,
+      color-mix(in oklab, #0b0604 34%, transparent) 48%,
+      transparent 64%);
+  }
+  .peak__scrim--you {
+    background: linear-gradient(to bottom,
+      color-mix(in oklab, #0b0604 94%, transparent) 0%,
+      color-mix(in oklab, #0b0604 76%, transparent) 24%,
+      color-mix(in oklab, #0b0604 30%, transparent) 42%,
+      transparent 56%);
+  }
+  .peak__lead { width: auto; right: var(--sc-gutter); bottom: clamp(2.5rem, 8svh, 5rem); }
+  .peak__you { left: var(--sc-gutter); bottom: auto; top: calc(var(--bar-h) + 5svh); font-size: var(--sc-t-2xl); text-align: left; max-width: none; }
+  .peak__lead .sc-lede { max-width: none; }
+
+  .release__grid { row-gap: var(--sc-6); }
+  .release__fig { grid-column: 1 / -1; margin-right: calc(var(--sc-gutter) * -0.4); }
+  .release__fig img { aspect-ratio: 5 / 4; }
+  .release__text { grid-column: 1 / -1; padding-bottom: 0; }
+
+  .close__stage {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    row-gap: var(--sc-5);
+    padding-top: calc(var(--bar-h) + var(--sc-4));
+  }
+  .close__text .sc-display { font-size: var(--sc-t-2xl); }
+  .close__text .sc-lede { margin-top: var(--sc-3); font-size: 1.02rem; }
+  .tab { --seg-w: min(27.5vw, 15svh); rotate: -3deg; align-self: center; }
+  .tab__label { white-space: normal; max-width: 6.4em; }
+  .foot { padding-block: var(--sc-3); }
+}
+
+/* -------------------------------------------------------- reduced motion -- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__plane--far img, .hero__plane--subject, .hero__plane--near, .hero__mist { transform: none; }
+  .tab__piece, .tab__label { transition: none; }
+  .tab__piece-in { transform: none; }
+}
